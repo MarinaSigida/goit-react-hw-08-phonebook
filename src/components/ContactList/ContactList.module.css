@@ -1,0 +1,13 @@
+.list {
+    width: 400px;
+    padding: 20px 10px 10px;
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .error {
+    color: #c2c2c2;
+    text-align: center;
+  }

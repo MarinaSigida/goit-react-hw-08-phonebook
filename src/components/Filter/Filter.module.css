@@ -1,0 +1,28 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+  position: relative;
+  border-radius: 2.5em;
+  margin-top: 10px;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputName {
+  font-size: 20px;
+  border: 2px solid rgb(208, 157, 249);
+  border-radius: 10px;
+  width: 100%;
+  height: 30px;
+  padding: 5px 5px;
+  box-sizing: border-box;
+}
+
+.inputName:hover,
+.inputName:focus {
+  border: 2px solid rgb(141, 39, 224);
+  transition: border 0.2s;
+}
