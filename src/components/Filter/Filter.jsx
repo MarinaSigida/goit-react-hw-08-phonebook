@@ -1,29 +1,26 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectFilter } from '../../redux/filter/filter-selectors';
-import { filterContactAction } from '../../redux/filter/filter-slice';
+import PropTypes from 'prop-types';
 import style from './Filter.module.css';
 
 
-const Filter = () => {
-  const filterValue = useSelector(selectFilter);
-  const dispatch = useDispatch();
-
+export const Filter = ({ onChangeFilter }) => {
   return (
-  <div className={style.searchContainer}>
-    <label className={style.search}>
-      <input
+    <div>
+      <label className={style.search}>
+        Search
+        <input
+        onChange={e => onChangeFilter(e)}
         type="text"
         name="filter"
         placeholder=" "
         className={style.inputName}
-        title="Enter search name"
-        onChange={(e)=> dispatch(filterContactAction(e.target.value))}
-        value={filterValue}
-      />
-    </label>
-  </div>)
+        title="Enter search name"/>
+      </label>
+    </div>
+  );
+};
+
+Filter.propTypes = {
+  onChangeFilter: PropTypes.func.isRequired,
 };
 
 
-export default Filter;

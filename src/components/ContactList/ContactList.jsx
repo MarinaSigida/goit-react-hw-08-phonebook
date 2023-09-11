@@ -1,55 +1,75 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilteredContacts } from '../../redux/filter/filter-selectors';
-import { deleteContactsThunk } from '../../redux/contacts/contacts-thunk';
-import {getContactsThunk} from '../../redux/contacts/contacts-thunk';
-import ContactItem from '../ContactItem/ContactItem';
+import { VscTrash, VscEdit } from 'react-icons/vsc';
+import {
+  selectContacts,
+  selectFilterContacts,
+} from 'redux/contacts/contactsSelectors';
+import { useState } from 'react';
+import { deleteContacts } from 'redux/contacts/contactsOperations';
+import { Modal } from 'components/Modal/Modal';
 import style from './ContactList.module.css';
 
-const ContactList = () => {
-  const contacts = useSelector(selectFilteredContacts);
+export const ContactList = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updateContactId, setUpdateContactId] = useState(null);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-   
-    dispatch(getContactsThunk());
-  }, [dispatch]);
+  const contacts = useSelector(selectContacts);
+  const filterContacts = useSelector(selectFilterContacts);
 
-  const handleContactDelete = (id) => {
-    dispatch(deleteContactsThunk(id));
+  const onDeleteContact = id => {
+    dispatch(deleteContacts(id));
   };
 
-  
+  const onModalOpen = id => {
+    setIsModalOpen(true);
+    setUpdateContactId(id);
+  };
+
+  const onCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <ul className={style.list}>
-      {contacts.length ? (
-        contacts.map(({ id, name, number }) => {
-          return (
-            <ContactItem
-              key={id}
-              id={id}
-              name={name}
-              number={number}
-              onDelete={() => handleContactDelete(id)}
-            />
-          );
-        })
+    <>
+      {!contacts.length && <p>Your phonebook is empty</p>}
+      {filterContacts.length > 0 ? (
+        <ul className={style.contact_list}>
+          {filterContacts.map(({ id, name, number }) => (
+            <li className={style.contact_list_item} key={id} data-id={id}>
+                <p className={style.contact_list_values}>
+                  {name}: {number}
+                </p>
+
+
+              <div className={style.contact_list_btn_wrapper}>
+                <button
+                  type="button"
+                  name="updateBtn"
+                  onClick={() => onModalOpen(id)}
+                  className={style.contact_list_btn}
+                >
+                  <VscEdit />
+                </button>
+                <button
+                  type="button"
+                  name="deleteBtn"
+                  onClick={() => onDeleteContact(id)}
+                  className={style.contact_list_btn}
+                >
+                  <VscTrash />
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       ) : (
-        <li className={style.error}>The list is empty</li>
+        contacts.length > 0 && <p>Nothing found...</p>
       )}
-    </ul>
+      {isModalOpen && (
+        <Modal onCloseModal={onCloseModal} updateContactId={updateContactId} />
+      )}
+    </>
   );
 };
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-};
-
-export default ContactList;

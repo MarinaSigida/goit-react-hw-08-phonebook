@@ -1,22 +1,86 @@
-import React from 'react';
-import ContactForm from './ContactForm/ContactForm';
-import Filter from './Filter/Filter';
-import ContactList from './ContactList/ContactList';
-import style from '../components/App.module.css';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { lazy, useEffect } from 'react';
+import { Layout } from './Layout/Layout';
+import {
+  selectAuthIsRefreshingCurrentUser,
+  selectAuthToken,
+} from 'redux/auth/authSelectors';
+import { refreshCurrentUser } from 'redux/auth/authOperations';
+import { fetchContacts } from 'redux/contacts/contactsOperations';
+import { PublicRoute } from './PublicRoute';
+import { PrivateRoute } from './PrivateRoute';
 
-const App = () => {
-  
+
+
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const PhonebookPage = lazy(() => import('pages/PhonebookPage/PhonebookPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LogInPage = lazy(() => import('pages/LogInPage/LogInPage'));
+
+
+
+export const App = () => {
+  const dispatch = useDispatch();
+  const token = useSelector(selectAuthToken);
+  const isRefreshingCurrentUser = useSelector(
+    selectAuthIsRefreshingCurrentUser
+  );
+
+  useEffect(() => {
+    dispatch(refreshCurrentUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (token) dispatch(fetchContacts());
+  }, [dispatch, token]);
+
   return (
-    <div>
-      <h1 className={style.title}>Phonebook</h1>
-      <ContactForm />
-      <h2 className={style.title}>Contacts</h2>
-      <div className={style.contact_list_container}>
-        <Filter />
-        <ContactList/>
-      </div>
-    </div>
+    <>
+      {!isRefreshingCurrentUser && (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <PublicRoute>
+                  <HomePage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="phonebook"
+              element={
+                <PrivateRoute>
+                  <PhonebookPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <PublicRoute restricted>
+                  <RegisterPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <PublicRoute restricted>
+                  <LogInPage />
+                </PublicRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      )}
+    </>
   );
 };
 
-export default App;
+
+
+
+

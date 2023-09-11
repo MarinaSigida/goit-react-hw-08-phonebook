@@ -1,4 +1,13 @@
-.form {
+.contacts_update_title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+  color: #1f3349;
+  margin-bottom: 15px;
+}
+
+.contacts_update_form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,14 +18,15 @@
   box-shadow: 5px 5px 5px #8b8b8b, -14px -14px 23px #ffffff;
   padding: 20px 20px;
 }
-.label {
+
+.contacts_update_label {
   font-size: 16px;
   width: 250px;
   color: #ffffff;
   font-weight: bold;
 }
 
-.input {
+.contacts_update_input {
   display: inline-block;
   border: none;
   outline: none;
@@ -30,13 +40,13 @@
   padding: 5px 5px;
 }
 
-.input:focus {
+.contacts_update_input:focus {
   background-color: white;
   transform: scale(1.05);
   transition: scale 0.2s;
 }
 
-.submit_btn {
+.contacts_update_button {
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 14px;
@@ -44,14 +54,13 @@
   text-transform: uppercase;
   cursor: pointer;
   color: #4f0087;
-  background-color:white;
+  background-color: white;
   border: 1px solid rgb(218, 218, 218);
-
 }
 
-.submit_btn:hover,
-.submit_btn:focus {
+.contacts_update_button:hover,
+.contacts_update_button:focus {
   border: 1px solid rgb(141, 39, 224);
   font-weight: bold;
-  transition:background-color 0.5s ;
+  transition: background-color 0.5s;
 }
