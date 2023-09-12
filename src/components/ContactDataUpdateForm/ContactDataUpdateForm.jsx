@@ -55,7 +55,7 @@ export const ContactDataUpdateForm = ({ onCloseModal, updateContactId }) => {
 
   return (
     <>
-      <h2 className={style.contacts_update_title}>Update contacts</h2>
+      <h2>Update contacts</h2>
       <form
         onSubmit={onFormSubmitAddContact}
         className={style.contacts_update_form}
@@ -66,7 +66,6 @@ export const ContactDataUpdateForm = ({ onCloseModal, updateContactId }) => {
             onChange={onInputChange}
             type="text"
             name="name"
-            className={style.contacts_update_input}
             value={name}
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
@@ -80,7 +79,6 @@ export const ContactDataUpdateForm = ({ onCloseModal, updateContactId }) => {
             value={number}
             type="tel"
             name="number"
-            className={style.contacts_update_input}
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             placeholder="Enter phone number"

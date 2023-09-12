@@ -44,7 +44,6 @@ export const RegistrationForm = () => {
   const onFormSubmit = e => {
     e.preventDefault();
     dispatch(register(userRegisterData)).then(response => {
-        console.log(response);
       if (response.payload === 'Registration incomplete, error code - 400') {
         toast.error('Oops...This user already exists!');
         return;
@@ -69,44 +68,41 @@ export const RegistrationForm = () => {
 
   return (
     <>
-    <p className={style.registration_form_title}>Sign up form</p>
-      <form onSubmit={onFormSubmit}>
-        <label className={style.registration_form_label}>
+    <p className={style.registration_form_title}>Create an account</p>
+      <form className={style.registration_form_container} onSubmit={onFormSubmit}>
+        <label>
           Name
           <input
             onChange={onInputChange}
             type="text"
             name="name"
-            className={style.registration_form_input}
             value={name}
             required
             placeholder="Enter your name"
           />
         </label>
-        <label className={style.registration_form_label}>
+        <label>
           E-mail
           <input
             onChange={onInputChange}
             value={email}
             type="email"
             name="email"
-            className={style.registration_form_input}
             required
             placeholder="Enter your e-mail"
           />
         </label>
-        <p className={style.registration_form_label}>
+        <label>
           Password
           <input
             onChange={onInputChange}
             value={password}
             type="password"
             name="password"
-            className={style.registration_form_input}
             required
             placeholder="Enter your password"
           />
-        </p>
+        </label>
 
         <button type="submit" className={style.registration_form_button}>
           Sign up

@@ -33,16 +33,13 @@ export const ContactList = () => {
 
   return (
     <>
-      {!contacts.length && <p>Your phonebook is empty</p>}
-      {filterContacts.length > 0 ? (
+      {filterContacts.length > 0 && (
         <ul className={style.contact_list}>
           {filterContacts.map(({ id, name, number }) => (
             <li className={style.contact_list_item} key={id} data-id={id}>
                 <p className={style.contact_list_values}>
                   {name}: {number}
                 </p>
-
-
               <div className={style.contact_list_btn_wrapper}>
                 <button
                   type="button"
@@ -64,12 +61,12 @@ export const ContactList = () => {
             </li>
           ))}
         </ul>
-      ) : (
-        contacts.length > 0 && <p>Nothing found...</p>
-      )}
+      ) }
       {isModalOpen && (
         <Modal onCloseModal={onCloseModal} updateContactId={updateContactId} />
       )}
+            {/* {!contacts.length && <div className={style.contact_list_empty}>Your phonebook is empty</div>} */}
+
     </>
   );
 };

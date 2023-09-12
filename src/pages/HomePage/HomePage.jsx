@@ -16,9 +16,10 @@ const HomePage = () => {
         </>
       ) : (
         <>
-          <title className={style.home_page_title}>
-            Welcome to the Phonebook
-          </title>
+          <div className={style.home_page_title}>Welcome</div>
+          <div className={style.home_page_title}>
+            <span>to the PHONEBOOK!</span>
+          </div>
           <p className={style.home_page_info}>
             Ready to use it? Please, Sign up or Log in
           </p>

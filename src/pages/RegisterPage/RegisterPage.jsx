@@ -4,7 +4,7 @@ import style from './RegisterPage.module.css';
 
 export const RegisterPage = () => {
   return (
-    <div className={style.register_page_title}>
+    <div className={style.register_page}>
       <Helmet>
         <title>Sign up</title>
       </Helmet>

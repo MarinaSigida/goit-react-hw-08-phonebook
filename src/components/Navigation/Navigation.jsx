@@ -8,11 +8,11 @@ export const Navigation = () => {
   const token = useSelector(selectAuthToken);
   return (
     <div className={style.navigation_link_container}>
-      <NavLink className={style.navigation_link} to="/" end>
+      <NavLink className={style.link} to="/" end>
         Home
       </NavLink>
       {token && (
-        <NavLink className={style.navigation_link} to="phonebook">
+        <NavLink className={style.link} to="phonebook">
           Phonebook
         </NavLink>
       )}

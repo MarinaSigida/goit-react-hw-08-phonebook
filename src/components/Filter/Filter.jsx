@@ -4,7 +4,7 @@ import style from './Filter.module.css';
 
 export const Filter = ({ onChangeFilter }) => {
   return (
-    <div>
+    <>
       <label className={style.search}>
         Search
         <input
@@ -15,7 +15,7 @@ export const Filter = ({ onChangeFilter }) => {
         className={style.inputName}
         title="Enter search name"/>
       </label>
-    </div>
+    </>
   );
 };
 

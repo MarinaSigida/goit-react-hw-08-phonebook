@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { VscAdd } from 'react-icons/vsc';
 import { toast } from 'react-toastify';
 
 import style from './Phonebook.module.css';
@@ -53,7 +52,6 @@ export const Phonebook = ({ onAddContact }) => {
             type="text"
             name="name"
             value={name}
-            className={style.phonebook_input}            
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             placeholder="Enter a name"
@@ -66,14 +64,13 @@ export const Phonebook = ({ onAddContact }) => {
             value={number}
             type="tel"
             name="number"
-            className={style.phonebook_input}
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             placeholder="Enter a number"
           />
         </label>
         <button type="submit" className={style.phonebook_submit_btn}>
-          Add contact <VscAdd />
+          Add contact
         </button>
       </form>
     </>

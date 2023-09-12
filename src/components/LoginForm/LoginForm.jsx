@@ -63,7 +63,7 @@ export const LoginForm = () => {
   return (
     <>
       <p className={style.login_form_title}>Log in</p>
-      <form onSubmit={onFormSubmit}>
+      <form className={style.login_form_container} onSubmit={onFormSubmit}>
         <label className={style.login_form_label}>
           Email
           <input
@@ -71,7 +71,6 @@ export const LoginForm = () => {
             value={email}
             type="email"
             name="email"
-            className={style.login_form_input}
             required
             placeholder="Enter your e-mail"
           />
@@ -83,7 +82,6 @@ export const LoginForm = () => {
             value={password}
             type="password"
             name="password"
-            className={style.login_form_input}
             required
             placeholder="Enter your password"
           />

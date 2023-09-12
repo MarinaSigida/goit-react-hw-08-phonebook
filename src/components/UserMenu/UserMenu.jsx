@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import { logout } from 'redux/auth/authOperations';
 import { selectAuthUser } from 'redux/auth/authSelectors';
-
 import { useMedia } from 'react-use';
 import { toast } from 'react-toastify';
 import style from './UserMenu.module.css';
-// ===========================================
+
+
 
 export const UserMenu = () => {
   const isMobile = useMedia('(max-width: 768px)');
