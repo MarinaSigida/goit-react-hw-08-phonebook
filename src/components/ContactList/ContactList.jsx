@@ -65,7 +65,9 @@ export const ContactList = () => {
       {isModalOpen && (
         <Modal onCloseModal={onCloseModal} updateContactId={updateContactId} />
       )}
-            {/* {!contacts.length && <div className={style.contact_list_empty}>Your phonebook is empty</div>} */}
+            {!contacts.length && <div className={style.contact_list_empty}>
+              {/* Your phonebook is empty */}
+              </div>}
 
     </>
   );
