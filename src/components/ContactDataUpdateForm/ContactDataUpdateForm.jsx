@@ -9,7 +9,8 @@ import style from './ContactDataUpdateForm.module.css';
 
 export const ContactDataUpdateForm = ({ onCloseModal, updateContactId }) => {
   const contacts = useSelector(selectContacts);
-  const dispatsh = useDispatch();
+
+  const dispatch = useDispatch();
   const userToUpdateArr = contacts.filter(
     contact => contact.id === updateContactId
   );
@@ -41,9 +42,17 @@ export const ContactDataUpdateForm = ({ onCloseModal, updateContactId }) => {
     }
   };
 
-  const onFormSubmitAddContact = e => {
+  const onFormSubmitEditContact = e => {
     e.preventDefault();
-    dispatsh(updateContact(stateData));
+
+    const uniqUserSearch = editedUser =>
+      contacts.find(
+        ({ id, name }) => id !== editedUser.id && name === editedUser.name
+      );
+    uniqUserSearch(stateData)
+      ? toast.info(`${stateData.name} is already in Phonebook`)
+      : dispatch(updateContact(stateData));
+
     onCloseModal();
     onFormReset();
   };
@@ -57,7 +66,7 @@ export const ContactDataUpdateForm = ({ onCloseModal, updateContactId }) => {
     <>
       <h2>Update contacts</h2>
       <form
-        onSubmit={onFormSubmitAddContact}
+        onSubmit={onFormSubmitEditContact}
         className={style.contacts_update_form}
       >
         <label className={style.contacts_update_label}>
